@@ -1,0 +1,46 @@
+.header h1 {
+    font-size: 36px;
+    color: white;
+    margin: 0;
+
+}
+
+.header ul {
+    list-style-type: none;
+    padding-left: 0;
+    margin-left: 107px;
+}
+
+.header li {
+    display: inline-block;
+    border-left: white 3px solid;
+    border-right: white 3px solid;
+    margin-left: 17px;
+    padding: 1px 5px 1px;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+.header li a {
+    color: cyan;
+
+}
+
+.header li a:hover {
+    color: chartreuse;
+    text-decoration: underline;
+}
+
+.header, .footer {
+    background-color: black;
+    color: cyan;
+}
+
+.footer p {
+    margin-left: 25%;
+}
