@@ -1,0 +1,23 @@
+.loginForm
+{
+    position: fixed;
+    top: 150px;
+    left: 200px;
+    min-width: 600px;
+    background-color: bisque;
+    border-radius: 15px;
+}
+
+.loginForm h1 {
+    margin-left: 15%;
+}
+
+.closeButton {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    border: none;
+}
+.closeButton:hover {
+    background-color: chartreuse;
+}
