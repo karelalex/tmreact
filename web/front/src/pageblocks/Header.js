@@ -11,7 +11,7 @@ function Header(props) {
             <li><Link to="/">Главная</Link></li>
             <li><Link to="/projects">Проекты</Link></li>
             <li><Link to="/tasks">Задачи</Link></li>
-            <li><a href='#' onClick={props.logoutHandler}>Выход</a></li>
+            <li><Link to="/" onClick={props.logoutHandler}>Выход</Link></li>
         </span>
     }
     return (

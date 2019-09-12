@@ -1,4 +1,6 @@
 import React from 'react';
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {faEnvelopeOpen, faEdit, faTrashAlt} from "@fortawesome/free-solid-svg-icons";
 
 class ProjectTable extends React.Component {
     projectToRows() {
@@ -8,6 +10,7 @@ class ProjectTable extends React.Component {
                 <td>{project.name}</td>
                 <td>{project.description}</td>
                 <td>{project.finishDate}</td>
+                <td><FontAwesomeIcon icon={faEnvelopeOpen}/>&nbsp;<FontAwesomeIcon icon={faEdit}/>&nbsp;<FontAwesomeIcon icon={faTrashAlt}/></td>
             </tr>
         );
         return rows;
@@ -20,6 +23,7 @@ class ProjectTable extends React.Component {
                 <th>Название</th>
                 <th>Описание</th>
                 <th>Дата окончания</th>
+                <th>Действия</th>
             </tr>
             {this.props.projects ? this.projectToRows() : <tr>
                 <td colSpan={3}>no data</td>

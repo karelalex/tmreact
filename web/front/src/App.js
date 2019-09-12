@@ -13,13 +13,14 @@ class App extends React.Component {
         return (
             <Router>
                 <Content>
-                    <Route path="/" exact component={MainPage}/>
-                    <Route path ="/projects" component = {ProjectListPage} />
-                    <Route path = "/tasks" component = {TaskListPage}/>
+
                 </Content>
             </Router>
         );
     }
 }
 
+const ProjectRoute = (props) => (
+    <Route path ="/projects" render={()=><ProjectListPage {...props} />} />
+)
 export default App;

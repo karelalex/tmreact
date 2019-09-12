@@ -3,6 +3,10 @@ import './App.css';
 import Footer from './pageblocks/Footer.js'
 import Header from "./pageblocks/Header";
 import LoginForm from "./pageblocks/LoginForm";
+import MainPage from "./pageblocks/MainPage";
+import TaskListPage from "./pageblocks/TaskListPage";
+import ProjectListPage from "./pageblocks/ProjectListPage";
+import {Route} from 'react-router-dom'
 
 
 class Content extends React.Component {
@@ -12,59 +16,31 @@ class Content extends React.Component {
             loggedIn: false,
             auth: {showLogin: false}
         };
-        fetch('/random')
-            .then(response => response.json())
-            .then(text => this.setState({random: text}));
         this.showLoginFormHandler = this.showLoginFormHandler.bind(this);
-        this.loginHandler=this.loginHandler.bind(this);
+        this.loginHandler = this.loginHandler.bind(this);
         this.logoutHandler = this.logoutHandler.bind(this);
-        this.projectHandler = this.projectHandler.bind(this);
         this.hideLoginFormHandler = this.hideLoginFormHandler.bind(this);
-        this.loginChangeHandler=this.loginChangeHandler.bind(this);
-        this.passwordChangeHandler=this.passwordChangeHandler.bind(this);
+        this.loginChangeHandler = this.loginChangeHandler.bind(this);
+        this.passwordChangeHandler = this.passwordChangeHandler.bind(this);
+        this.projectHandler = this.projectHandler.bind(this);
     }
 
-    loginChangeHandler(event){
+    loginChangeHandler(event) {
         let authClone = Object.assign({}, this.state.auth, {login: event.target.value});
-        this.setState({auth:authClone})
+        this.setState({auth: authClone})
     }
 
-    passwordChangeHandler(event){
+    passwordChangeHandler(event) {
         let authClone = Object.assign({}, this.state.auth, {password: event.target.value});
-        this.setState({auth:authClone})
+        this.setState({auth: authClone})
     }
+
     showLoginFormHandler() {
         this.setState({auth: {showLogin: true}})
     }
 
     hideLoginFormHandler() {
         this.setState({auth: {showLogin: false}})
-    }
-
-    loginHandler(event){
-        const requestBody ='login='+this.state.auth.login
-            +'&'
-            + 'password='+this.state.auth.password;
-        fetch('/auth/login', {
-            method : "POST",
-            headers : {
-                'Content-type' : 'application/x-www-form-urlencoded; charset=UTF-8'
-            },
-            body: requestBody
-        })
-            .then(response => {
-                if (response.ok) {
-                    this.hideLoginFormHandler();
-                    this.setState({loggedIn : true})
-                }
-            });
-        event.preventDefault();
-    }
-
-    logoutHandler() {
-        fetch('/auth/logout')
-            .then( ()=>this.setState({loggedIn: false}))
-
     }
 
     projectHandler() {
@@ -79,6 +55,32 @@ class Content extends React.Component {
             })
     }
 
+    loginHandler(event) {
+        const requestBody = 'login=' + this.state.auth.login
+            + '&'
+            + 'password=' + this.state.auth.password;
+        fetch('/auth/login', {
+            method: "POST",
+            headers: {
+                'Content-type': 'application/x-www-form-urlencoded; charset=UTF-8'
+            },
+            body: requestBody
+        })
+            .then(response => {
+                if (response.ok) {
+                    this.hideLoginFormHandler();
+                    this.setState({loggedIn: true})
+                }
+            });
+        event.preventDefault();
+    }
+
+    logoutHandler() {
+        fetch('/auth/logout')
+            .then(() => this.setState({loggedIn: false}))
+
+    }
+
     render() {
         return (
             <div>
@@ -87,15 +89,21 @@ class Content extends React.Component {
                     username={this.state.username}
                     loginHandler={this.showLoginFormHandler}
                     logoutHandler={this.logoutHandler}
-                    projectHandler={this.projectHandler}
                 />
-                {this.state.auth.showLogin ?  <LoginForm
+                {this.state.auth.showLogin ? <LoginForm
                     closeHandler={this.hideLoginFormHandler}
                     loginHandler={this.loginHandler}
                     loginChangeHandler={this.loginChangeHandler}
                     passChangeHandler={this.passwordChangeHandler}
                 /> : null}
-                {this.props.children}
+                <div>
+                    <Route path="/" exact component={MainPage}/>
+                    <Route path="/projects" render={() => <ProjectListPage
+                        projects={this.state.projects}
+                        projectHandler={this.projectHandler}
+                    />}/>
+                    <Route path="/tasks" component={TaskListPage}/>
+                </div>
                 <Footer/>
             </div>
         );
