@@ -10,7 +10,7 @@ class ProjectTable extends React.Component {
                 <td>{project.name}</td>
                 <td>{project.description}</td>
                 <td>{project.finishDate}</td>
-                <td><FontAwesomeIcon icon={faEnvelopeOpen}/>&nbsp;<FontAwesomeIcon icon={faEdit}/>&nbsp;<FontAwesomeIcon icon={faTrashAlt}/></td>
+                <td><FontAwesomeIcon icon={faEnvelopeOpen}/>&nbsp;<FontAwesomeIcon icon={faEdit}/>&nbsp;<FontAwesomeIcon icon={faTrashAlt} onClick={this.props.projectRemover.bind(null, project.id)}/></td>
             </tr>
         );
         return rows;

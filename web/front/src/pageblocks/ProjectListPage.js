@@ -1,16 +1,20 @@
 import ProjectTable from "../guicomponents/ProjectTable";
 import React from 'react';
 
-class ProjectListPage extends React.Component{
+class ProjectListPage extends React.Component {
 
-    componentDidMount(){
+    componentDidMount() {
         this.props.projectHandler();
     }
 
 
     render() {
-        return <ProjectTable projects = {this.props.projects}/>
+        return <ProjectTable
+            projects={this.props.projects}
+            projectRemover={this.props.projectRemover}
+        />
     }
 
 }
+
 export default ProjectListPage;

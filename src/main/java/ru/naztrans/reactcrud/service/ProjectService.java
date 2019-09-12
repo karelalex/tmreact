@@ -15,4 +15,9 @@ public class ProjectService {
     public List<Project> getAll(){
         return projectRepository.findAll();
     }
+    public Project getById(String id) {return projectRepository.getOne(id);}
+
+    public void removeById(String projectId) {
+        projectRepository.deleteById(projectId);
+    }
 }

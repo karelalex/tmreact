@@ -23,6 +23,7 @@ class Content extends React.Component {
         this.loginChangeHandler = this.loginChangeHandler.bind(this);
         this.passwordChangeHandler = this.passwordChangeHandler.bind(this);
         this.projectHandler = this.projectHandler.bind(this);
+        this.projectRemover=this.projectRemover.bind(this);
     }
 
     loginChangeHandler(event) {
@@ -52,6 +53,19 @@ class Content extends React.Component {
             .then(response => response.json())
             .then(json => {
                 this.setState({projects: json})
+            })
+    }
+
+    projectRemover(id) {
+        fetch('/project/'+id,
+            {
+                method : "DELETE"
+            })
+            .then(response=>{
+                if(response.ok) {
+                    let restOfProjects = this.state.projects.filter(item=>item.id!==id);
+                    this.setState({projects : restOfProjects});
+                }
             })
     }
 
@@ -101,6 +115,7 @@ class Content extends React.Component {
                     <Route path="/projects" render={() => <ProjectListPage
                         projects={this.state.projects}
                         projectHandler={this.projectHandler}
+                        projectRemover={this.projectRemover}
                     />}/>
                     <Route path="/tasks" component={TaskListPage}/>
                 </div>
