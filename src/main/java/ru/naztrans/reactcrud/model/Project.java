@@ -4,7 +4,6 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.Entity;
 import javax.persistence.Temporal;
@@ -22,4 +21,14 @@ public class Project extends AbstractEntity {
 
     @Temporal(TemporalType.DATE)
     private Date finishDate;
+
+    @Override
+    public String toString() {
+        return "Project{" +
+                "id='"+ getId()+ '\'' +
+                "name='" + name + '\'' +
+                ", description='" + description + '\'' +
+                ", finishDate=" + finishDate +
+                '}';
+    }
 }

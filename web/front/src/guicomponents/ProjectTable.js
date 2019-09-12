@@ -10,14 +10,20 @@ class ProjectTable extends React.Component {
                 <td>{project.name}</td>
                 <td>{project.description}</td>
                 <td>{project.finishDate.toLocaleDateString()}</td>
-                <td><FontAwesomeIcon icon={faEnvelopeOpen}/>&nbsp;<FontAwesomeIcon icon={faEdit}/>&nbsp;<FontAwesomeIcon icon={faTrashAlt} onClick={this.props.projectRemover.bind(null, project.id)}/></td>
+                <td>
+                    <FontAwesomeIcon icon={faEnvelopeOpen}/>
+                    &nbsp;<FontAwesomeIcon icon={faEdit}
+                                           onClick={this.props.projectEditorShow.bind(null, project.id)}/>
+                    &nbsp;<FontAwesomeIcon icon={faTrashAlt}
+                                           onClick={this.props.projectRemover.bind(null, project.id)}/>
+                </td>
             </tr>
         );
         return rows;
     }
 
     render() {
-        return <table>
+        return <table className='projectTable'>
             <tbody>
             <tr>
                 <th>Название</th>

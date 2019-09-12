@@ -21,7 +21,8 @@ public class ProjectController {
 
     @GetMapping("/{id}")
     public Project getProject(@PathVariable("id") String projectId){
-       return projectService.getById(projectId);
+       Project project=projectService.getById(projectId);
+       return project;
     }
 
     @DeleteMapping("/{id}")

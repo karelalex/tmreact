@@ -1,0 +1,13 @@
+.edit-window {
+    position: fixed;
+    top: 150px;
+    left:200px;
+    margin: auto;
+    min-width: 800px;
+    background-color: bisque;
+    border-radius: 15px;
+}
+
+.edit-window h1 {
+    text-align: center;
+}

@@ -51,7 +51,7 @@ body {
     background-color: whitesmoke;
 }
 
-table {
+table.projectTable {
     padding: 5px;
     border-style: none;
     width: 90%;
@@ -59,33 +59,33 @@ table {
     border-spacing: 5px 3px;
 }
 
-table .id {
+table.projectTable .id {
     width: 20%;
 }
 
-table .name {
+table.projectTable .name {
     width: 15%;
 }
 
-table .action{
+table.projectTable .action{
     width: min-content;
     white-space: nowrap;
 }
 
-table tr:nth-child(odd) td {
+table.projectTable tr:nth-child(odd) td {
     background-color: rgb(255, 253, 245);
 }
 
-table tr:nth-child(even) td {
+table.projectTable tr:nth-child(even) td {
     background-color: aliceblue;
 }
 
-tr td:nth-child(1) {
+table.projectTable tr td:nth-child(1) {
     text-align: center;
     width: 25px;
 }
 
-td, th {
+table.projectTable td, th {
     padding: 5px;
     border-style: solid;
     border-width: 3px;
@@ -106,7 +106,7 @@ td, th {
     border-radius: 10px;
 }
 
-.prop-cover div {
+.prop-cover div.covered {
     border: black 1px solid;
     min-height: 20px;
     padding: 5px 15px 5px;

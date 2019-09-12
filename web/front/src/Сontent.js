@@ -24,8 +24,9 @@ class Content extends React.Component {
         this.loginChangeHandler = this.loginChangeHandler.bind(this);
         this.passwordChangeHandler = this.passwordChangeHandler.bind(this);
         this.projectHandler = this.projectHandler.bind(this);
-        this.projectRemover=this.projectRemover.bind(this);
-        this.projectCreater=this.projectCreater.bind(this);
+        this.projectRemover = this.projectRemover.bind(this);
+        this.projectCreater = this.projectCreater.bind(this);
+        this.saveProject = this.saveProject.bind(this);
     }
 
     loginChangeHandler(event) {
@@ -54,38 +55,57 @@ class Content extends React.Component {
             })
             .then(response => response.json())
             .then(json => {
-                let projects=json.map((item)=>new Project(item.name, item.description, item.finishDate, item.id));
+                let projects = json.map((item) => new Project(item.name, item.description, item.finishDate, item.id));
                 this.setState({projects: projects})
             })
     }
 
     projectRemover(id) {
-        fetch('/project/'+id,
+        fetch('/project/' + id,
             {
-                method : "DELETE"
+                method: "DELETE"
             })
-            .then(response=>{
-                if(response.ok) {
-                    let restOfProjects = this.state.projects.filter(item=>item.id!==id);
-                    this.setState({projects : restOfProjects});
+            .then(response => {
+                if (response.ok) {
+                    let restOfProjects = this.state.projects.filter(item => item.id !== id);
+                    this.setState({projects: restOfProjects});
                 }
             })
     }
-    projectCreater(){
+
+    projectCreater() {
         const project = new Project("Имя");
         fetch('project',
             {
-                method : 'POST',
-                body : JSON.stringify(project),
+                method: 'POST',
+                body: JSON.stringify(project),
                 headers: {
-                    'Content-type' : 'application/json'
+                    'Content-type': 'application/json'
                 }
-            }).then(response=>{
-                if(response.ok) {
-                    let projects = this.state.projects.slice();
-                    projects.unshift(project);
-                    this.setState({projects : projects})
+            }).then(response => {
+            if (response.ok) {
+                let projects = this.state.projects.slice();
+                projects.unshift(project);
+                this.setState({projects: projects})
+            }
+        })
+    }
+
+    saveProject(project) {
+        fetch('project',
+            {
+                method: 'PUT',
+                body: JSON.stringify(project),
+                headers: {
+                    'Content-type': 'application/json'
                 }
+            }).then(response => {
+            if (response.ok) {
+                let projects = this.state.projects.slice();
+                projects = projects.filter((i) => i.id !== project.id);
+                projects.unshift(project);
+                this.setState({projects: projects})
+            }
         })
     }
 
@@ -137,6 +157,7 @@ class Content extends React.Component {
                         projectHandler={this.projectHandler}
                         projectRemover={this.projectRemover}
                         projectCreater={this.projectCreater}
+                        projectSaver={this.saveProject}
                     />}/>
                     <Route path="/tasks" component={TaskListPage}/>
                 </div>

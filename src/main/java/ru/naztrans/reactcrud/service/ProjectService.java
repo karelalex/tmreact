@@ -5,9 +5,11 @@ import org.springframework.stereotype.Service;
 import ru.naztrans.reactcrud.model.Project;
 import ru.naztrans.reactcrud.repository.ProjectRepository;
 
+import javax.transaction.Transactional;
 import java.util.List;
 
 @Service
+@Transactional
 public class ProjectService {
     @Autowired
     private ProjectRepository projectRepository;

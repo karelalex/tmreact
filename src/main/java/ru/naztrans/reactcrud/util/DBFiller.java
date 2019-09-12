@@ -17,7 +17,7 @@ public class DBFiller implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
         for (int i = 1; i <= 17; i++) {
-            projectRepository.save(new Project("Проект " + i, "Описание проекта " + i, new Date(123, 7, 5)));
+            projectRepository.save(new Project("Проект " + i, "Описание проекта " + i, new Date(123, 7, 17)));
         }
     }
 }
