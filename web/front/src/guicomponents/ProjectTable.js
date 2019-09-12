@@ -9,7 +9,7 @@ class ProjectTable extends React.Component {
             <tr key={project.id}>
                 <td>{project.name}</td>
                 <td>{project.description}</td>
-                <td>{project.finishDate}</td>
+                <td>{project.finishDate.toLocaleDateString()}</td>
                 <td><FontAwesomeIcon icon={faEnvelopeOpen}/>&nbsp;<FontAwesomeIcon icon={faEdit}/>&nbsp;<FontAwesomeIcon icon={faTrashAlt} onClick={this.props.projectRemover.bind(null, project.id)}/></td>
             </tr>
         );

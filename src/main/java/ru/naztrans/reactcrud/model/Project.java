@@ -20,7 +20,6 @@ public class Project extends AbstractEntity {
     private String name;
     private String description;
 
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
     @Temporal(TemporalType.DATE)
     private Date finishDate;
 }

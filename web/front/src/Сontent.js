@@ -54,7 +54,8 @@ class Content extends React.Component {
             })
             .then(response => response.json())
             .then(json => {
-                this.setState({projects: json})
+                let projects=json.map((item)=>new Project(item.name, item.description, item.finishDate, item.id));
+                this.setState({projects: projects})
             })
     }
 
@@ -82,7 +83,6 @@ class Content extends React.Component {
             }).then(response=>{
                 if(response.ok) {
                     let projects = this.state.projects.slice();
-                    project.finishDate=project.finishDate.toLocaleDateString();
                     projects.unshift(project);
                     this.setState({projects : projects})
                 }
