@@ -20,4 +20,8 @@ public class ProjectService {
     public void removeById(String projectId) {
         projectRepository.deleteById(projectId);
     }
+
+    public void saveProject(Project project) {
+        projectRepository.save(project);
+    }
 }

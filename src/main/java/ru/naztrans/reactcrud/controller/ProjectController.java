@@ -28,4 +28,14 @@ public class ProjectController {
     public void removeProject(@PathVariable("id") String projectId){
         projectService.removeById(projectId);
     }
+
+    @PostMapping
+    public void addProject(@RequestBody Project project){
+        projectService.saveProject(project);
+    }
+
+    @PutMapping
+    public void updateProject(@RequestBody Project project) {
+        projectService.saveProject(project);
+    }
 }

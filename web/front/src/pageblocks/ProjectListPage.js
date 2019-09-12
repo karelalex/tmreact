@@ -9,10 +9,12 @@ class ProjectListPage extends React.Component {
 
 
     render() {
-        return <ProjectTable
+        return <div><ProjectTable
             projects={this.props.projects}
             projectRemover={this.props.projectRemover}
         />
+            <button onClick={this.props.projectCreater}>Создать проект</button>
+        </div>
     }
 
 }

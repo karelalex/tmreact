@@ -7,6 +7,7 @@ import MainPage from "./pageblocks/MainPage";
 import TaskListPage from "./pageblocks/TaskListPage";
 import ProjectListPage from "./pageblocks/ProjectListPage";
 import {Route} from 'react-router-dom'
+import Project from "./model/project";
 
 
 class Content extends React.Component {
@@ -24,6 +25,7 @@ class Content extends React.Component {
         this.passwordChangeHandler = this.passwordChangeHandler.bind(this);
         this.projectHandler = this.projectHandler.bind(this);
         this.projectRemover=this.projectRemover.bind(this);
+        this.projectCreater=this.projectCreater.bind(this);
     }
 
     loginChangeHandler(event) {
@@ -67,6 +69,24 @@ class Content extends React.Component {
                     this.setState({projects : restOfProjects});
                 }
             })
+    }
+    projectCreater(){
+        const project = new Project("Имя");
+        fetch('project',
+            {
+                method : 'POST',
+                body : JSON.stringify(project),
+                headers: {
+                    'Content-type' : 'application/json'
+                }
+            }).then(response=>{
+                if(response.ok) {
+                    let projects = this.state.projects.slice();
+                    project.finishDate=project.finishDate.toLocaleDateString();
+                    projects.unshift(project);
+                    this.setState({projects : projects})
+                }
+        })
     }
 
     loginHandler(event) {
@@ -116,6 +136,7 @@ class Content extends React.Component {
                         projects={this.state.projects}
                         projectHandler={this.projectHandler}
                         projectRemover={this.projectRemover}
+                        projectCreater={this.projectCreater}
                     />}/>
                     <Route path="/tasks" component={TaskListPage}/>
                 </div>
